@@ -155,14 +155,17 @@ app.use((req, res, next) => {
 });
 
 // start app
+console.log('*******************************************************');
+console.log(`starting on port : ${serverConfig.port}`);
+
 app.listen(serverConfig.port, (error) => {
   if (!error) {
     console.log(`MERN is running on port: ${serverConfig.port}! Build something amazing!`); // eslint-disable-line
-  }else {
-    console.error("*******************************************************")
-    console.error(`failed to start on por : ${serverConfig.port}`)
-    console.error(error)
-    console.error(error.stack)
+  } else {
+    console.error('*******************************************************');
+    console.error(`failed to start on por : ${serverConfig.port}`);
+    console.error(error);
+    console.error(error.stack);
   }
 });
 

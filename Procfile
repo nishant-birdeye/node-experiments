@@ -1,1 +1,1 @@
-web: npm run bs
+web: yarn && yarn bs

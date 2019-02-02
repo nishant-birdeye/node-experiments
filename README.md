@@ -117,6 +117,9 @@ If there's an error in matching we return 500 status code, if no matches are fou
 
 `fetchComponentData` is the essential function. It takes three params: first is a dispatch function of Redux store, the second is an array of components that should be rendered in current route and third is the route params. `fetchComponentData` collects all the needs (need is an array of actions that are required to be dispatched before rendering the component) of components in the current route. It returns a promise when all the required actions are dispatched. We render the page and send data to the client for client-side rendering in `window.__INITIAL_STATE__`.
 
+# Heroku config
+```heroku config:set NPM_CONFIG_PRODUCTION=false```
+
 ### Client
 
 Client directory contains all the shared components, routes, modules.

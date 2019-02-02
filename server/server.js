@@ -158,6 +158,11 @@ app.use((req, res, next) => {
 app.listen(serverConfig.port, (error) => {
   if (!error) {
     console.log(`MERN is running on port: ${serverConfig.port}! Build something amazing!`); // eslint-disable-line
+  }else {
+    console.error("*******************************************************")
+    console.error(`failed to start on por : ${serverConfig.port}`)
+    console.error(error)
+    console.error(error.stack)
   }
 });
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Import Style
-import styles from './App.css';
+import styles from './App.scss';
 
 // Import Components
 import Helmet from 'react-helmet';
@@ -13,7 +13,6 @@ import Footer from './components/Footer/Footer';
 // Import Actions
 import { checkSession } from '../../account/account_actions';
 import { toggleAddPost } from './AppActions';
-import { switchLanguage } from '../../modules/Intl/IntlActions';
 
 let DevTools;
 if (process.env.NODE_ENV === 'development') {
@@ -65,9 +64,7 @@ export class App extends Component {
             ]}
           />
           <Header
-            switchLanguage={lang => this.props.dispatch(switchLanguage(lang))}
-            intl={this.props.intl}
-            toggleAddPost={this.toggleAddPostSection}
+            user={this.props.userAccount.user}
           />
           <div className={styles.container}>
             {this.props.children}

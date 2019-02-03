@@ -22,6 +22,47 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.scss/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              localIdentName: cssModulesIdentName,
+              modules: true,
+              importLoaders: 1,
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [
+                postcssFocus(),
+                cssnext({
+                  browsers: ['last 2 versions', 'IE > 10'],
+                }),
+                postcssReporter({
+                  clearMessages: true,
+                }),
+              ],
+            },
+          },
+          "sass-loader",
+          {
+            loader: 'sass-resources-loader',
+            options: {
+              // resources: []
+              resources: ['./client/style/base/_vars.scss', './src/style/base/_base.scss']
+              // resources: './src/style/base/*.scss'
+            }
+          }
+        ]
+      },
+      {
         test: /\.css$/,
         exclude: /node_modules/,
         use: [

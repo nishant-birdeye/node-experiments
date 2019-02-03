@@ -45,7 +45,7 @@ import Helmet from 'react-helmet';
 // Import required modules
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
-import posts from './posts/post.routes';
+import posts from './modules/posts/post.routes';
 import dummyData from './dummyData';
 import serverConfig from './config';
 

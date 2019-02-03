@@ -41,11 +41,13 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import Helmet from 'react-helmet';
+import passport from 'passport';
 
 // Import required modules
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
 import posts from './modules/posts/post.routes';
+import auth from './modules/auth/auth.routes';
 import dummyData from './dummyData';
 import serverConfig from './config';
 
@@ -70,7 +72,17 @@ app.use(compression());
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../dist/client')));
+
+app.use(require('express-session')({
+  secret: 'server-sercret-should-go-into-env',
+  resave: true,
+  saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 app.use('/api', posts);
+app.use('/auth', auth);
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {

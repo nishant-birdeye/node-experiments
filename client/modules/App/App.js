@@ -11,6 +11,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
 // Import Actions
+import { checkSession } from '../../account/account_actions';
 import { toggleAddPost } from './AppActions';
 import { switchLanguage } from '../../modules/Intl/IntlActions';
 
@@ -27,7 +28,16 @@ export class App extends Component {
   }
 
   componentDidMount() {
+    if (!this.props.userAccount.user) {
+      this.props.dispatch(checkSession());
+    }
     this.setState({isMounted: true}); // eslint-disable-line
+  }
+
+  componentDidUpdate() {
+    if (this.props.userAccount.noSessionFound && window.location.pathname !== '/login') {
+      window.location = '/login';
+    }
   }
 
   toggleAddPostSection = () => {
@@ -73,12 +83,14 @@ App.propTypes = {
   children: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
+  userAccount: PropTypes.object.isRequired,
 };
 
 // Retrieve data from store as props
 function mapStateToProps(store) {
   return {
     intl: store.intl,
+    userAccount: store.userAccount,
   };
 }
 

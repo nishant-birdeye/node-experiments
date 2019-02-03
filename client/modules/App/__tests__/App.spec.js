@@ -16,6 +16,7 @@ const props = {
   children,
   dispatch,
   intl: intlProp,
+  userAccount: { user: {} },
 };
 
 test('renders properly', t => {

@@ -265,8 +265,9 @@ Also, `target-path` supports [ejs](https://github.com/mde/ejs) and the following
 
 3. `helpers` - an helper object is passed which include common utility functions. For now, it contains `capitalize`. If you want to add more, send a PR to [mern-cli](https://github.com/Hashnode/mern-cli).
 
-# Run mongo locally
-```docker run --name my-local-mongo -v mongo-data:/data/db -p 27017:27017 -d mongo
+# Connecting to mongo in dev
+```
+  use url -  localhost:27019
 ``` 
 
 #### Blueprint files

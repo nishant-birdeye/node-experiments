@@ -4,6 +4,7 @@ import callApi from '../../util/apiCaller';
 export const ADD_POST = 'ADD_POST';
 export const ADD_POSTS = 'ADD_POSTS';
 export const DELETE_POST = 'DELETE_POST';
+export const FETCH_POST = 'FETCH_POST';
 
 // Export Actions
 export function addPost(post) {
@@ -33,11 +34,7 @@ export function addPosts(posts) {
 }
 
 export function fetchPosts() {
-  return (dispatch) => {
-    return callApi('posts').then(res => {
-      dispatch(addPosts(res.posts));
-    });
-  };
+  return { type: FETCH_POST };
 }
 
 export function fetchPost(cuid) {

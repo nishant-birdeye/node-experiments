@@ -41,7 +41,7 @@ export class App extends Component {
         <div>
           <Helmet
             title="IKAGAI"
-            titleTemplate="Find your puprose"
+            titleTemplate="IKAGAI - Discover your purpose"
             meta={[
               { charset: 'utf-8' },
               {

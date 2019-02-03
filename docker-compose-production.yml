@@ -12,6 +12,7 @@ services:
     environment:
       NODE_ENV: production
       MONGO_URL: "mongodb://ikagua:aB/987654321@ds119795.mlab.com:19795/ikagia"
+      APP_URL: "http://ec2-18-222-72-225.us-east-2.compute.amazonaws.com"
   db:
     image: mongo:latest
     volumes:

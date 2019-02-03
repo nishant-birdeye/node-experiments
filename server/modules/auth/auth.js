@@ -1,5 +1,6 @@
 import passport from 'passport';
 import { Strategy } from 'passport-google-oauth2';
+import User from '../users/user.model';
 
 const GoogleOAuth2Strategy = Strategy;
 
@@ -8,10 +9,22 @@ passport.use(new GoogleOAuth2Strategy({
   clientSecret: '84vG1CFdOl4C87FicfpwNezi',
   callbackURL: `${process.env.APP_URL}/auth/google/callback`,
 }, (req, accessToken, refreshToken, profile, done) => {
-  done(null, { username: 'abhi kaha hai bhala' });
-  // User.findOrCreate(..., function (err, user) {
-  //   done(err, user);
-  // });
+  const createNewuser = () => {
+    const newUser = new User({
+      name: profile.displayName,
+      email: profile.email,
+      profileImage: profile.image.url
+    });
+    newUser.save((err, user) => {
+      done(err, user);
+    });
+  };
+
+  const ifUserExists = (err, user) => {
+    user ? done(err, user) : createNewuser();
+  };
+
+  User.find({ email: profile.email }, ifUserExists);
 },
 ));
 

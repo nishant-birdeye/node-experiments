@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import passport from 'passport';
-import { loginError } from './auth.controller';
+import { loginError, whoAmI } from './auth.controller';
 
 require('./auth');
 const router = new Router();
@@ -14,6 +14,7 @@ router.route('/google/callback').get(passport.authenticate('google', {
   failureRedirect: '/auth/google/failure'
 }));
 
-router.route('/auth/google/failure').get(loginError);
+router.route('/google/failure').get(loginError);
+router.route('/me').get(whoAmI);
 
 export default router;

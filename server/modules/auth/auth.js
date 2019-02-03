@@ -13,7 +13,7 @@ passport.use(new GoogleOAuth2Strategy({
     const newUser = new User({
       name: profile.displayName,
       email: profile.email,
-      profileImage: profile.image.url
+      profileImage: (profile.photos[0] || {}).value
     });
     newUser.save((err, user) => {
       done(err, user);
@@ -24,12 +24,12 @@ passport.use(new GoogleOAuth2Strategy({
     user ? done(err, user) : createNewuser();
   };
 
-  User.find({ email: profile.email }, ifUserExists);
+  User.findOne({ email: profile.email }, ifUserExists);
 },
 ));
 
 passport.serializeUser((user, done) => {
-  done(null, user);
+  done(null, user.id);
 });
 
 passport.deserializeUser((user, done) => {
